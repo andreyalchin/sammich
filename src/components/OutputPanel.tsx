@@ -1,7 +1,7 @@
 // src/components/OutputPanel.tsx
 'use client'
 
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { TranslateResponse } from '@/types'
 import LinkedInCard from './LinkedInCard'
 import CopyButton from './CopyButton'
@@ -15,24 +15,23 @@ interface OutputPanelProps {
 }
 
 export default function OutputPanel({ result, error, userInput }: OutputPanelProps) {
-  const cardRef = useRef<HTMLDivElement>(null)
   const [popoverOpen, setPopoverOpen] = useState(false)
 
   const copyText = result ? buildCopyText(result.post, result.hashtags) : ''
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex-1 p-4 overflow-y-auto">
+    <div className="flex flex-col">
+      <div className="p-4" style={{ minHeight: 120 }}>
         {error && (
-          <p className="text-red-500 text-sm mt-4">{error}</p>
+          <p className="text-red-500 text-sm mt-2">{error}</p>
         )}
         {!result && !error && (
-          <div className="h-full flex items-center justify-center">
+          <div className="flex items-center justify-center" style={{ minHeight: 88 }}>
             <p className="text-gray-300 text-sm">Your LinkedIn masterpiece will appear here.</p>
           </div>
         )}
         {result && (
-          <LinkedInCard result={result} cardRef={cardRef} />
+          <LinkedInCard result={result} />
         )}
       </div>
 
@@ -49,7 +48,6 @@ export default function OutputPanel({ result, error, userInput }: OutputPanelPro
             <SharePopover
               result={result}
               userInput={userInput}
-              cardRef={cardRef}
               onClose={() => setPopoverOpen(false)}
             />
           )}

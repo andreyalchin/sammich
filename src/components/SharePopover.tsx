@@ -2,7 +2,6 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { type RefObject } from 'react'
 import { TranslateResponse, SharePlatform } from '@/types'
 import {
   buildLinkedInUrl,
@@ -11,12 +10,10 @@ import {
   buildWhatsAppUrl,
   buildCopyText,
 } from '@/lib/share'
-import { capturePostCard, downloadBlob } from '@/lib/screenshot'
 
 interface SharePopoverProps {
   result: TranslateResponse
   userInput: string
-  cardRef: RefObject<HTMLDivElement | null>
   onClose: () => void
 }
 
@@ -41,7 +38,7 @@ function openExternal(url: string) {
   window.open(url, '_blank', 'noopener,noreferrer')
 }
 
-export default function SharePopover({ result, userInput, cardRef, onClose }: SharePopoverProps) {
+export default function SharePopover({ result, userInput, onClose }: SharePopoverProps) {
   const popoverRef = useRef<HTMLDivElement>(null)
   const [loadingPlatform, setLoadingPlatform] = useState<SharePlatform | null>(null)
   const [instruction, setInstruction] = useState<string | null>(null)
@@ -80,19 +77,12 @@ export default function SharePopover({ result, userInput, cardRef, onClose }: Sh
 
       case 'instagram':
       case 'tiktok': {
-        setLoadingPlatform(platform)
+        const app = platform === 'instagram' ? 'Instagram' : 'TikTok'
         try {
           await navigator.clipboard.writeText(copyText)
-          if (cardRef.current) {
-            const blob = await capturePostCard(cardRef.current)
-            downloadBlob(blob, 'sammich-post.png')
-          }
-          const app = platform === 'instagram' ? 'Instagram' : 'TikTok'
-          setInstruction(`Text copied & image saved — open ${app} and paste`)
+          setInstruction(`Text copied — open ${app} and paste`)
         } catch {
           setInstruction('Something went wrong. Please try again.')
-        } finally {
-          setLoadingPlatform(null)
         }
         break
       }

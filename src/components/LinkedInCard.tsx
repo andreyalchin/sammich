@@ -1,17 +1,15 @@
 // src/components/LinkedInCard.tsx
-import { type RefObject } from 'react'
 import { TranslateResponse } from '@/types'
 
 const AVATAR_NAME = 'Alex P.'
 
 interface LinkedInCardProps {
   result: TranslateResponse
-  cardRef?: RefObject<HTMLDivElement | null>
 }
 
-export default function LinkedInCard({ result, cardRef }: LinkedInCardProps) {
+export default function LinkedInCard({ result }: LinkedInCardProps) {
   return (
-    <div ref={cardRef} className="bg-white rounded-lg border border-gray-200 p-5 shadow-sm">
+    <div className="bg-white rounded-lg border border-gray-200 p-5 shadow-sm">
       <div className="flex items-center gap-3 mb-4">
         <div className="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center text-gray-500 text-lg font-semibold flex-shrink-0">
           {AVATAR_NAME[0]}

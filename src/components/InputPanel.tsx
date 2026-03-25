@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 const MAX_LENGTH = 500
+const MIN_HEIGHT = 120
 
 interface InputPanelProps {
   onTranslate: (input: string) => void
@@ -11,20 +12,38 @@ interface InputPanelProps {
 
 export default function InputPanel({ onTranslate, isLoading }: InputPanelProps) {
   const [value, setValue] = useState('')
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   const isOverLimit = value.length > MAX_LENGTH
   const isEmpty = value.trim().length === 0
   const isDisabled = isEmpty || isOverLimit || isLoading
 
+  useEffect(() => {
+    const el = textareaRef.current
+    if (!el) return
+    el.style.height = 'auto'
+    el.style.height = Math.max(MIN_HEIGHT, el.scrollHeight) + 'px'
+  }, [value])
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+      if (!isDisabled) onTranslate(value)
+    }
+  }
+
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col">
       <textarea
-        className="flex-1 w-full resize-none p-4 text-gray-800 placeholder-gray-400 focus:outline-none text-base"
-        placeholder="Type anything… (e.g. 'I ate a sandwich')"
+        ref={textareaRef}
+        className="w-full resize-none p-4 text-gray-800 placeholder-gray-400 focus:outline-none text-base overflow-hidden"
+        style={{ minHeight: MIN_HEIGHT }}
+        placeholder={"Type anything… (e.g. 'I ate a sandwich')\nShift+Enter for new line · Enter to translate"}
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        onKeyDown={handleKeyDown}
       />
-      <div className="flex items-center justify-between px-4 py-2 border-t border-gray-100">
+      <div className="flex items-center justify-between px-4 py-3 border-t border-gray-100">
         <span className={`text-sm ${isOverLimit ? 'text-red-500' : 'text-gray-400'}`}>
           {value.length} / {MAX_LENGTH}
         </span>

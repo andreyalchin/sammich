@@ -42,13 +42,13 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col min-h-screen bg-gray-50">
       <Header />
-      <main className="flex flex-col md:flex-row flex-1 overflow-hidden">
-        <div className="flex flex-col md:w-1/2 border-b md:border-b-0 md:border-r border-gray-200 bg-white min-h-[300px] md:min-h-0">
+      <main className="flex flex-col md:flex-row md:items-stretch border-b border-gray-200">
+        <div className="md:w-1/2 border-b md:border-b-0 md:border-r border-gray-200 bg-white">
           <InputPanel onTranslate={handleTranslate} isLoading={isLoading} />
         </div>
-        <div className="flex flex-col md:w-1/2 bg-white min-h-[300px] md:min-h-0">
+        <div className="md:w-1/2 bg-white">
           <OutputPanel result={result} error={error} userInput={userInput} />
         </div>
       </main>
