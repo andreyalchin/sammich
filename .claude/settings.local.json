@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//z/Claude Projects/**)",
+      "Bash(npx create-next-app@latest sammich-temp --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --yes)",
+      "Bash(export PATH=\"/c/Program Files/nodejs:$PATH\")",
+      "Bash(npm --version)",
+      "Bash(npx --version)",
+      "Bash(cp -r \"Z:/Claude Projects/sammich-temp/.\" \"Z:/Claude Projects/Sammich/\")",
+      "Bash(rm -rf \"Z:/Claude Projects/sammich-temp\")",
+      "Bash(npm install:*)",
+      "Bash(timeout 20 npm run dev)",
+      "Bash(npm test:*)",
+      "Bash(ls \"Z:/Claude Projects/Sammich/.env\"*)",
+      "Bash(git -C \"Z:/Claude Projects/Sammich\" log --oneline)",
+      "Bash(git:*)",
+      "Bash(node -e \"const v = require\\(''Z:/Claude Projects/Sammich/node_modules/vitest/package.json''\\).version; console.log\\(''vitest'', v\\)\")",
+      "Bash(node -e \"const v = require\\(''Z:/Claude Projects/Sammich/node_modules/@vitejs/plugin-react/package.json''\\).version; console.log\\(''@vitejs/plugin-react'', v\\)\")",
+      "Bash(npm.cmd test:*)",
+      "Bash(where node:*)",
+      "Read(//usr/local/**)"
+    ]
+  }
+}

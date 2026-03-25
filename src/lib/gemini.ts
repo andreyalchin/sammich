@@ -59,7 +59,8 @@ export function parseTranslateResponse(raw: string): TranslateResponse {
     typeof parsed !== 'object' ||
     parsed === null ||
     typeof (parsed as Record<string, unknown>).post !== 'string' ||
-    !Array.isArray((parsed as Record<string, unknown>).hashtags)
+    !Array.isArray((parsed as Record<string, unknown>).hashtags) ||
+    !(parsed as Record<string, unknown[]>).hashtags.every((h) => typeof h === 'string')
   ) {
     throw new Error('Failed to parse AI response')
   }
@@ -71,8 +72,11 @@ export function parseTranslateResponse(raw: string): TranslateResponse {
 }
 
 export async function translate(input: string): Promise<TranslateResponse> {
+  if (!process.env.GEMINI_API_KEY) {
+    throw new Error('GEMINI_API_KEY is not set')
+  }
   const { GoogleGenerativeAI } = await import('@google/generative-ai')
-  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!)
+  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
   const model = genAI.getGenerativeModel({
     model: 'gemini-2.0-flash',
     systemInstruction: SYSTEM_PROMPT,

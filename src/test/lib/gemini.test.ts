@@ -53,4 +53,10 @@ describe('parseTranslateResponse', () => {
     const raw = '```json\n{"post":"ok","hashtags":["#a"]}\n```'
     expect(parseTranslateResponse(raw)).toEqual({ post: 'ok', hashtags: ['#a'] })
   })
+
+  it('throws if hashtags contains non-string elements', () => {
+    expect(() => parseTranslateResponse('{"post":"hello","hashtags":[1,2,3]}')).toThrow(
+      'Failed to parse AI response'
+    )
+  })
 })
