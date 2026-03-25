@@ -44,14 +44,16 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <Header />
-      <main className="flex flex-col md:flex-row md:items-stretch border-b border-gray-200">
-        <div className="md:w-1/2 border-b md:border-b-0 md:border-r border-gray-200 bg-white">
-          <InputPanel onTranslate={handleTranslate} isLoading={isLoading} />
-        </div>
-        <div className="md:w-1/2 bg-white">
-          <OutputPanel result={result} error={error} userInput={userInput} />
-        </div>
-      </main>
+      <div className="flex flex-1 justify-center px-4 py-8">
+        <main className="w-full max-w-3xl flex flex-col md:flex-row md:items-stretch border border-gray-200 rounded-xl overflow-hidden shadow-sm bg-white">
+          <div className="md:w-1/2 border-b md:border-b-0 md:border-r border-gray-200 flex flex-col">
+            <InputPanel onTranslate={handleTranslate} isLoading={isLoading} />
+          </div>
+          <div className="md:w-1/2 flex flex-col">
+            <OutputPanel result={result} error={error} userInput={userInput} />
+          </div>
+        </main>
+      </div>
     </div>
   )
 }

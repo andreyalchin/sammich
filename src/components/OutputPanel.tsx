@@ -20,13 +20,13 @@ export default function OutputPanel({ result, error, userInput }: OutputPanelPro
   const copyText = result ? buildCopyText(result.post, result.hashtags) : ''
 
   return (
-    <div className="flex flex-col">
-      <div className="p-4" style={{ minHeight: 120 }}>
+    <div className="flex flex-col flex-1">
+      <div className="flex-1 p-4" style={{ minHeight: 240 }}>
         {error && (
           <p className="text-red-500 text-sm mt-2">{error}</p>
         )}
         {!result && !error && (
-          <div className="flex items-center justify-center" style={{ minHeight: 88 }}>
+          <div className="flex items-center justify-center h-full" style={{ minHeight: 208 }}>
             <p className="text-gray-300 text-sm">Your LinkedIn masterpiece will appear here.</p>
           </div>
         )}

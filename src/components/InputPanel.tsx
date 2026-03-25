@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 
 const MAX_LENGTH = 500
-const MIN_HEIGHT = 120
+const MIN_HEIGHT = 240
 
 interface InputPanelProps {
   onTranslate: (input: string) => void
@@ -33,10 +33,10 @@ export default function InputPanel({ onTranslate, isLoading }: InputPanelProps) 
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col flex-1">
       <textarea
         ref={textareaRef}
-        className="w-full resize-none p-4 text-gray-800 placeholder-gray-400 focus:outline-none text-base overflow-hidden"
+        className="flex-1 w-full resize-none p-4 text-gray-800 placeholder-gray-400 focus:outline-none text-base overflow-hidden"
         style={{ minHeight: MIN_HEIGHT }}
         placeholder={"Type anything… (e.g. 'I ate a sandwich')\nShift+Enter for new line · Enter to translate"}
         value={value}
