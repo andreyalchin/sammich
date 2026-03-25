@@ -6,7 +6,7 @@ const AVATAR_NAME = 'Alex P.'
 
 interface LinkedInCardProps {
   result: TranslateResponse
-  cardRef?: RefObject<HTMLDivElement>
+  cardRef?: RefObject<HTMLDivElement | null>
 }
 
 export default function LinkedInCard({ result, cardRef }: LinkedInCardProps) {

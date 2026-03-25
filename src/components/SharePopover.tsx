@@ -16,7 +16,7 @@ import { capturePostCard, downloadBlob } from '@/lib/screenshot'
 interface SharePopoverProps {
   result: TranslateResponse
   userInput: string
-  cardRef: RefObject<HTMLDivElement>
+  cardRef: RefObject<HTMLDivElement | null>
   onClose: () => void
 }
 
