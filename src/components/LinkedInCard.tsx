@@ -27,8 +27,8 @@ export default function LinkedInCard({ result, cardRef }: LinkedInCardProps) {
       </p>
 
       <div className="flex flex-wrap gap-1">
-        {result.hashtags.map((tag) => (
-          <span key={tag} className="text-blue-600 text-sm hover:underline cursor-pointer">
+        {result.hashtags.map((tag, i) => (
+          <span key={`${tag}-${i}`} className="text-blue-600 text-sm hover:underline cursor-pointer">
             {tag}
           </span>
         ))}

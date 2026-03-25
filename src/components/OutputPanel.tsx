@@ -54,7 +54,7 @@ export default function OutputPanel({ result, error, userInput }: OutputPanelPro
             />
           )}
         </div>
-        <CopyButton text={copyText} />
+        <CopyButton text={copyText} disabled={!result} />
       </div>
     </div>
   )

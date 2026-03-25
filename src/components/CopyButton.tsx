@@ -5,9 +5,10 @@ import { useState } from 'react'
 
 interface CopyButtonProps {
   text: string
+  disabled?: boolean
 }
 
-export default function CopyButton({ text }: CopyButtonProps) {
+export default function CopyButton({ text, disabled }: CopyButtonProps) {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = async () => {
@@ -23,7 +24,8 @@ export default function CopyButton({ text }: CopyButtonProps) {
   return (
     <button
       onClick={handleCopy}
-      className="px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+      disabled={disabled}
+      className="px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
     >
       {copied ? 'Copied!' : 'Copy'}
     </button>
