@@ -89,6 +89,8 @@ export default function SharePopover({ result, userInput, cardRef, onClose }: Sh
           }
           const app = platform === 'instagram' ? 'Instagram' : 'TikTok'
           setInstruction(`Text copied & image saved — open ${app} and paste`)
+        } catch {
+          setInstruction('Something went wrong. Please try again.')
         } finally {
           setLoadingPlatform(null)
         }
